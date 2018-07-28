@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
-// import { bindActionCreators } from 'redux'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 class PokeListItem extends Component  {
     constructor(props) {
         super(props);
         this.state = {number: props.number + 1};
-      }
+    }
 
-      componentWillMount() {
+    componentWillMount() {
         this.acrescentaZero()
-      }
+    }
 
     acrescentaZero() {
             var number = this.state.number.toString()
@@ -30,10 +30,10 @@ class PokeListItem extends Component  {
     render(){    
         return(
             <li className="poke-list-item" >
-                {/* <Link to={`/${pkm.number}`} > */}
+                <Link to={`/${this.state.number}`} >
                     <img src={`https://serebii.net/pokedex-sm/icon/${this.state.number}.png`} alt="" />
                     <span>{this.state.number} - {this.props.name}</span>
-                {/* </Link> */}
+                </Link>
             </li>
     )}
 }

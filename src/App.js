@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import pokeBall from './pokeball.svg'
+import {Route} from 'react-router-dom';
 import './App.css'
 
 import PokeList from './components/pokeList'
+import PokeInfo from './components/pokeInfo'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <img className="pokeball-back" id="pokeballBack" src={pokeBall} alt="" />
-        <PokeList />
+        <Route exact path="/" render={() => <PokeList />} />
+        <Route exact path="/:pokeNumber" component={PokeInfo} />
       </div>
     );
   }

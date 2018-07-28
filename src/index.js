@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import {HashRouter as Router} from 'react-router-dom'
 
 import thunk from 'redux-thunk'
 import reducers from './reducers/rootReducer'
@@ -18,7 +19,9 @@ const store = applyMiddleware(thunk)(createStore)(reducers, devTools)
 
 ReactDOM.render(
     <Provider store={store} >
-        <App />
+        <Router>
+            <App />
+        </Router>
     </Provider>
     , document.getElementById('root')
 )
