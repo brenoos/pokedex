@@ -9,18 +9,22 @@ class PokeListItem extends Component  {
 
       componentWillMount() {
         this.acrescentaZero()
-        //   var string = this.state.number.toString
-        //   console.log(string.length)
       }
 
     acrescentaZero() {
-        let doisZeros = '00'
-        let umZero = '0'
-        let teste = this.state.number.toString
-        if(teste.length < 10 ){
-            console.log(teste)
-            // this.setState({number: `${doisZeros}${string}`})
-        }
+            var number = this.state.number.toString()
+            switch (number.length){
+                case 1:
+                    this.setState({number: "00"+this.state.number})
+                break
+                case 2:
+                    this.setState({number: "0"+this.state.number})
+                break
+                default:
+                    this.setState({number: this.state.number})
+                break
+            }
+
     }
 
     render(){    
