@@ -12,7 +12,7 @@ export const consultaPokemon = (number) => {
 }
 export const geraLista = () => {
     return dispatch => {
-        axios.get(`${URL_API}/pokemon/?limit=800&offset=0`)
+        axios.get(`${URL_API}/pokemon/?limit=802&offset=0`)
             .then(resp => {
                 dispatch({type: 'LISTA_CRIADA', payload: resp.data.results})
             })

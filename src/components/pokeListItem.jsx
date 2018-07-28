@@ -31,7 +31,7 @@ class PokeListItem extends Component  {
         return(
             <li className="poke-list-item" >
                 {/* <Link to={`/${pkm.number}`} > */}
-                    <img src={`https://serebii.net/pokedex-sm/icon/001.png`} alt="" />
+                    <img src={`https://serebii.net/pokedex-sm/icon/${this.state.number}.png`} alt="" />
                     <span>{this.state.number} - {this.props.name}</span>
                 {/* </Link> */}
             </li>
