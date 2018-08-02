@@ -4,33 +4,49 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { consultaPokemon } from '../actions/pkmActions'
 
-class PokeInfo extends Component {
+class PokeInfo extends Component {  
     constructor(props){
         super(props)
-    }
+        this.state = {
+            number: this.props.match.params.pokeNumber,
+            types: []
+        }
+    }  
 
-    
     componentWillMount() {
         this.props.consultaPokemon(this.props.match.params.pokeNumber)
     }
-    
 
+    componentWillUpdate() {
+        // this.setState({types: this.props.pkmInfo.types}) 
+    }
+    
+    
+    renderTypes(){        
+        {
+            const types = this.state.types
+            types.map(type => {
+                return(
+                    <li key={type.name} >
+                        <img src={`https://serebii.net/pokedex-bw/type/${type.name}.gif`} alt="foto type" />
+                    </li>
+                )
+            })
+        }
+    }
+    
     render(){
         return(
             <div>
                 <Link to="/" className="back-button"> &lt; </Link>
 
                 <div className="poke-profile" >
-                    {/* <div>#{pkm.number} - {pkm.name}</div> */}
-                    <img className="poke-sprite" src={`https://serebii.net/sunmoon/pokemon/${this.props.match.params.pokeNumber}.png`} />
+                    <div>#{this.state.number} - {this.props.pkmInfo.name}</div>
+                    <img className="poke-sprite" src={`https://serebii.net/sunmoon/pokemon/${this.props.match.params.pokeNumber}.png`} alt="sprite poke"/>
                 </div>
 
                 <ul className="poke-types" >
-
-                                <li  >
-                                    <img src={`https://serebii.net/pokedex-bw/type/normal.gif`} />
-                                </li>
-
+                    {this.renderTypes()}
                 </ul>
 
                 <table className="stats" >
@@ -55,7 +71,7 @@ class PokeInfo extends Component {
         );
     }
 }
-const mapStateToProps = state => ({pkm: state.pkm.pkm, pkmList: state.pkm.pkmList})
+const mapStateToProps = state => ({pkmInfo: state.pkm.pkmInfo})
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ consultaPokemon }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(PokeInfo)

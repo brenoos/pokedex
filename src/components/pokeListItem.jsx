@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 class PokeListItem extends Component  {
     constructor(props) {
-        super(props);
-        this.state = {number: props.number + 1};
+        super(props)
+        this.state = {number: props.number + 1}
     }
 
     componentWillMount() {
