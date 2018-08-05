@@ -1,21 +1,28 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
 import PokeListItem from './pokeListItem'
-import { bindActionCreators } from 'redux'
-import { geraLista } from '../actions/pkmActions'
+import axios from 'axios'
+
+const URL_API = 'https://pokeapi.co/api/v2'
 
 class PokeList extends Component{
     constructor(props){
         super(props)
         this.renderRows = this.renderRows.bind(this)
+        this.geraLista = this.geraLista.bind(this)
+        this.state = {pkmList: []}
     }
     
     componentWillMount(){
-     this.props.geraLista()
+        this.geraLista()
+    }
+
+    geraLista(){
+        axios.get(`${URL_API}/pokemon/?limit=802&offset=0`)
+        .then(resp => this.setState({pkmList: resp.data.results}))
     }
 
     renderRows(){
-        const list = this.props.pkmList || []
+        const list = this.state.pkmList || []
         return(
             list.map((pkm, index) => (
                 <PokeListItem key={index} number={index} name={pkm.name} />
@@ -31,7 +38,4 @@ class PokeList extends Component{
         );
     }
 }
-const mapStateToProps = state => ({pkmList: state.pkm.pkmList})
-const mapDispatchToProps = dispatch => 
-    bindActionCreators({ geraLista }, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(PokeList)
+export default PokeList
