@@ -7,6 +7,16 @@ import PokeList from './components/pokeList'
 import PokeInfo from './components/pokeInfo'
 
 class App extends Component {
+
+  componentDidMount(){
+    var pokeballElement = document.getElementById('pokeballBack');
+
+    window.onscroll = function(){
+        var rotation = `translateY(-50%) rotateZ(${window.scrollY / 15}deg)`;
+        pokeballElement.style.transform = rotation;
+    }
+  }
+
   render() {
     return (
       <div className="App">
