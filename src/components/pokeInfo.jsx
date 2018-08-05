@@ -44,13 +44,15 @@ class PokeInfo extends Component {
     renderTypes(){        
         {
             const types = this.state.types
-            types.map(type => {
-                return(
-                    <li key={type.type.name} >
-                        <img src={`https://serebii.net/pokedex-bw/type/${type.type.name}.gif`} alt="foto type" />
-                    </li>
-                )
-            })
+            return(
+                types.map(type => {
+                    return(
+                        <li key={type.type.name} >
+                            <img src={`https://serebii.net/pokedex-bw/type/${type.type.name}.gif`} alt="foto type" />
+                        </li>
+                    )
+                })                  
+            )        
         }
     }
     
@@ -65,7 +67,7 @@ class PokeInfo extends Component {
                 </div>
 
                 <ul className="poke-types" >
-                    {console.log(this.renderTypes())}
+                    {this.renderTypes()}
                 </ul>
 
                 <table className="stats" >
