@@ -2,6 +2,7 @@
   "name": "pokedex2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pokedex-309e9.firebaseapp.com",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.1",
