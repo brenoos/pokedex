@@ -29,12 +29,12 @@ class PokeListItem extends Component  {
 
     render(){    
         return(
-            <li className="poke-list-item" >
                 <Link to={`/${this.state.number}`} >
-                    <img src={`https://serebii.net/pokedex-sm/icon/${this.state.number}.png`} alt="" />
-                    <span>{this.state.number} - {this.props.name}</span>
+                    <li className="poke-list-item" >
+                        <img src={`https://serebii.net/pokedex-sm/icon/${this.state.number}.png`} alt="" />
+                        <span>{this.state.number} - {this.props.name}</span>
+                    </li>
                 </Link>
-            </li>
     )}
 }
 export default PokeListItem
