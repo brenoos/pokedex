@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
 
+const _ = require('lodash')
 const URL_API = 'https://pokeapi.co/api/v2'
 
 
@@ -62,7 +63,7 @@ class PokeInfo extends Component {
                 <Link to="/" className="back-button"> &lt; </Link>
 
                 <div className="poke-profile" >
-                    <div>#{this.state.number} - {this.state.pkm.name}</div>
+                    <div>#{this.state.number} - {_.upperFirst(this.state.pkm.name)}</div>
                     <img className="poke-sprite" src={`https://serebii.net/sunmoon/pokemon/${this.props.match.params.pokeNumber}.png`} alt="sprite poke"/>
                 </div>
 
