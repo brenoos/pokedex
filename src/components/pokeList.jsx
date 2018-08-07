@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import PokeListItem from './pokeListItem'
 import axios from 'axios'
 
+const _ = require('lodash')
+
 const URL_API = 'https://pokeapi.co/api/v2'
 
 class PokeList extends Component{
@@ -9,32 +11,65 @@ class PokeList extends Component{
         super(props)
         this.renderRows = this.renderRows.bind(this)
         this.geraLista = this.geraLista.bind(this)
-        this.state = {pkmList: []}
+        // this.keyHandler = this.keyHandler.bind(this)
+        this.change = this.change.bind(this)
+        this.state = {
+            pkmList: [],
+            filter: ''    
+        }
     }
     
     componentWillMount(){
         this.geraLista()
     }
 
+    // keyHandler(e){
+    //     if(e.key === 'Enter'){
+    //         console.log("enter")
+    //         // this.setState({filter: e.target.value})
+    //     }
+    // }
+
+    change(e){
+        console.log(e.target.value)
+        this.setState({filter: e.target.value})
+    }
+
     geraLista(){
         axios.get(`${URL_API}/pokemon/?limit=802&offset=0`)
-        .then(resp => this.setState({pkmList: resp.data.results}))
+        .then(resp => {
+            var list = []
+            _.forEach(resp.data.results, (obj, index) => {
+                obj.number = index
+                index++
+                list.push(obj)
+            })
+
+            this.setState({pkmList: list})
+        })
     }
 
     renderRows(){
         const list = this.state.pkmList || []
+        var filtro = _.filter(list, pkm => {
+            return !_.isEmpty(this.state.filter) ? pkm.name.indexOf(_.toLower(this.state.filter)) > -1 : true
+        })
         return(
-            list.map((pkm, index) => (
-                <PokeListItem key={index} number={index} name={pkm.name} />
+            filtro.map((pkm) => (
+                <PokeListItem key={pkm.number} number={pkm.number} name={pkm.name} />
             ))
         )
     }
 
     render(){
         return(
-            <ul className="poke-list" id="pokeList" >
-                {this.renderRows()}
-            </ul>
+            <div>
+                <input type="text" id="pokeFilter" placeholder="Search"
+                    onChange={this.change} />
+                <ul className="poke-list" id="pokeList" >
+                    {this.renderRows()}
+                </ul>   
+            </div>
         );
     }
 }

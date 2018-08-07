@@ -21,6 +21,8 @@ class App extends Component {
     return (
       <div className="App">
         <img className="pokeball-back" id="pokeballBack" src={pokeBall} alt="" />
+        
+
         <Route exact path="/" render={() => <PokeList />} />
         <Route exact path="/:pokeNumber" component={PokeInfo} />
       </div>
