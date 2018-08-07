@@ -16,9 +16,12 @@
     border: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #666;
-    color: #fff; }
-  
+    background-color: #000000;
+    color: #ffffff;
+    }
+  ::placeholder{
+    color: #ffffff;
+  }
   #pokeFilter:focus{
     outline: none;
   }

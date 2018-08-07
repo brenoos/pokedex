@@ -64,7 +64,7 @@ class PokeList extends Component{
     render(){
         return(
             <div>
-                <input type="text" id="pokeFilter" placeholder="Search"
+                <input type="text" id="pokeFilter" placeholder="Buscar"
                     onChange={this.change} />
                 <ul className="poke-list" id="pokeList" >
                     {this.renderRows()}
