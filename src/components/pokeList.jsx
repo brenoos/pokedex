@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PokeListItem from './pokeListItem'
 import axios from 'axios'
+import Loading from 'react-loading'
 
 const _ = require('lodash')
 
@@ -15,13 +16,18 @@ class PokeList extends Component{
         this.change = this.change.bind(this)
         this.state = {
             pkmList: [],
-            filter: ''    
+            filter: '',
+            loading: true    
         }
     }
     
     componentWillMount(){
         this.geraLista()
     }
+
+    // componentDidMount(){
+    //  this.setState({loading: false})
+    // }
 
     // keyHandler(e){
     //     if(e.key === 'Enter'){
@@ -45,7 +51,7 @@ class PokeList extends Component{
                 list.push(obj)
             })
 
-            this.setState({pkmList: list})
+            this.setState({pkmList: list, loading: false})
         })
     }
 
@@ -63,14 +69,14 @@ class PokeList extends Component{
 
     render(){
         return(
-            <div>
+           <div>
                 <input type="text" id="pokeFilter" placeholder="Buscar"
                     onChange={this.change} />
                 <ul className="poke-list" id="pokeList" >
-                    {this.renderRows()}
+                    { this.state.loading ? <Loading id="loading" type="bars" color="#000000" /> : this.renderRows() }
                 </ul>   
-            </div>
-        );
+            </div> 
+        )
     }
 }
 export default PokeList

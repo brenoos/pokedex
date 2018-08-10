@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
+import Loading from 'react-loading'
 
 const _ = require('lodash')
 const URL_API = 'https://pokeapi.co/api/v2'
@@ -19,7 +20,8 @@ class PokeInfo extends Component {
             spAtk: 0,
             def: 0,
             atk: 0,
-            types: []
+            types: [],
+            loading: true
         }
     }  
 
@@ -37,7 +39,8 @@ class PokeInfo extends Component {
                     spAtk: resp.data.stats[2].base_stat,
                     def: resp.data.stats[3].base_stat,
                     atk: resp.data.stats[4].base_stat,
-                    types: resp.data.types
+                    types: resp.data.types,
+                    loading: false
                 }
             ))
     }
@@ -58,7 +61,12 @@ class PokeInfo extends Component {
     }
     
     render(){
-        return(
+        let template
+        
+        if(this.state.loading){
+            template = <Loading id="loading" type="bars" color="#000000" />
+        }else{
+            template = 
             <div>
                 <Link to="/" className="back-button"> &lt; </Link>
 
@@ -90,7 +98,12 @@ class PokeInfo extends Component {
                     </tbody>
                 </table>
             </div>
-        );
+        }
+
+
+        return(
+            template
+        )
     }
 }
 export default PokeInfo
