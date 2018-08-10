@@ -17,6 +17,7 @@ class PokeList extends Component{
         this.state = {
             pkmList: [],
             filter: '',
+            afabetico: false,
             loading: true    
         }
     }
@@ -24,17 +25,6 @@ class PokeList extends Component{
     componentWillMount(){
         this.geraLista()
     }
-
-    // componentDidMount(){
-    //  this.setState({loading: false})
-    // }
-
-    // keyHandler(e){
-    //     if(e.key === 'Enter'){
-    //         console.log("enter")
-    //         // this.setState({filter: e.target.value})
-    //     }
-    // }
 
     change(e){
         this.setState({filter: e.target.value})
@@ -55,7 +45,11 @@ class PokeList extends Component{
     }
 
     renderRows(){
-        const list = this.state.pkmList || []
+        var arrumado 
+        this.state.afabetico ? arrumado = _.sortBy(this.state.pkmList, ['name']) : arrumado = _.sortBy(this.state.pkmList, ['index'])
+        
+        const list = arrumado || []
+         
         var filtro = _.filter(list, pkm => {
             return !_.isEmpty(this.state.filter) ? pkm.name.indexOf(_.toLower(this.state.filter)) > -1 : true
         })
