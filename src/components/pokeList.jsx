@@ -37,7 +37,6 @@ class PokeList extends Component{
     // }
 
     change(e){
-        console.log(e.target.value)
         this.setState({filter: e.target.value})
     }
 
