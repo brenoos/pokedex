@@ -26,11 +26,11 @@ class PokeInfo extends Component {
     }  
 
     componentWillMount() {
-        this.consultaPokemon(this.props.match.params.pokeNumber)
+        this.consultaPokemon(_.toNumber(this.props.match.params.pokeNumber))
     }
 
     consultaPokemon(number){
-        axios.get(`${URL_API}/pokemon/${number}`)
+        axios.get(`${URL_API}/pokemon/${number}/`)
             .then(resp => this.setState(
                 {
                     pkm: resp.data, 
